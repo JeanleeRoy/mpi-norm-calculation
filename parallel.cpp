@@ -34,7 +34,7 @@ int main (int argc, char *argv[]) {
 
     if (rank == master) {
         // Initialize A
-        A = genSquareMatrix(N);
+        A = genSqMatrix(N);
         fillMatrix(N, A);
         printSqaureMatrix(N, A);
         
@@ -60,13 +60,14 @@ int main (int argc, char *argv[]) {
         cout << "\nResult: " << norm << endl;
 
         // Free Memory
-        deleteMatrix(N, A);
+        //deleteMatrix(N, A);
+        freeMatrix(A);
     }
     
     // Other process
     else { 
         // Initialize
-        A = generateDimension(k, N);
+        A = genMatrix(k, N);
 
         // Receive k rows from master
         for (int i = 0; i < k; i++) {  // O(n/P * n) ~ O(n^2/P)
@@ -83,7 +84,8 @@ int main (int argc, char *argv[]) {
             MPI_Send(&pNorm, 1, MPI_DOUBLE, master, 0, MPI_COMM_WORLD);
         }
 
-        deleteMatrix(k, A);
+        //deleteMatrix(k, A);
+        freeMatrix(A);
     }
     
     MPI_Finalize();

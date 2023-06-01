@@ -19,7 +19,7 @@ double  infNorm(double** A) {
 int main() {
     cout << "Gen matrix\n";
     double** A;
-    A = genSquareMatrix(N);
+    A = genSqMatrix(N);
     //printSqaureMatrix(N, A);
     cout << "Fill matrix\n";
     fillMatrix(N, A);
@@ -28,5 +28,5 @@ int main() {
 
     cout << "\nResult: " << infNorm(A) << endl;
 
-    deleteMatrix(N, A);
+    freeMatrix(A);
 }
